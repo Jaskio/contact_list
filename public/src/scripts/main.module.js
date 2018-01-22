@@ -22,14 +22,25 @@
 
             $routeProvider
                 .when('/', {
-                    templateUrl: 'dist/views/test.html',
+                    templateUrl: 'dist/views/contacts.html',
                     controller: 'ContactsController',
                     controllerAs: 'CC'
                 })
-                .when('/contacts', {
-                    templateUrl: 'dist/views/test.html',
+                .when('/contact/add', {
+                    templateUrl: 'dist/views/add_contact.html',
                     controller: 'ContactsController',
                     controllerAs: 'CC'
+                })
+                .when('/contact/:id/edit', {
+                    templateUrl: 'dist/views/edit_contact.html',
+                    controller: 'ContactsController',
+                    controllerAs: 'CC'
+                })
+                .when('/contact/:id/delete', {
+                    templateUrl: 'dist/views/delete_contact.html',
+                    controller: 'ContactsController',
+                    controllerAs: 'CC',
+                    test: 'test'
                 })
         };
 
