@@ -1,4 +1,4 @@
-(function(){
+(function() {
     'use strict';
 
     angular
@@ -9,7 +9,7 @@
 
         function ContactsService($q, $http) {
             var service = {};
-            var ENDPOINT_PATH = 'contacts';
+            var ENDPOINT_PATH = 'http://localhost:3000/';
 
             _init();
 
@@ -22,16 +22,16 @@
                 var defer = $q.defer();
                 var provided_id = id || null;
 
-                console.log(provided_id);
+                $http.put(ENDPOINT_PATH + 'contacts/2', {
+                        name: "third name 5"
+                    })
+                    .then(function(response) {
+                        defer.resolve(response.data);
+                    }, function(err) {
+                        defer.reject(err.data);
+                    });
 
-                // $http.post(ENDPOINT_PATH + '/get', {id: provided_id})
-                //     .then(function(response) {
-                //         defer.resolve(response.data);
-                //     }, function(err) {
-                //         defer.reject(err.data);
-                //     });
-
-                // return defer.promise;
+                return defer.promise;
             }
 
             return service;

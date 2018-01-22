@@ -21,6 +21,11 @@
             $locationProvider.hashPrefix('');
 
             $routeProvider
+                .when('/', {
+                    templateUrl: 'dist/views/test.html',
+                    controller: 'ContactsController',
+                    controllerAs: 'CC'
+                })
                 .when('/contacts', {
                     templateUrl: 'dist/views/test.html',
                     controller: 'ContactsController',
