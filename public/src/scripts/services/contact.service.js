@@ -64,7 +64,7 @@
             function _deleteContact(id) {
                 var defer = $q.defer();
 
-                $http.delete(ENDPOINT_PATH + data.id)
+                $http.delete(ENDPOINT_PATH + id)
                     .then(function(response) {
                         defer.resolve(response.data);
                     }, function(err) {

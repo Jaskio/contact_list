@@ -16,13 +16,13 @@
     
             vm.contacts = [];
             vm.form_data = {};
+            vm.searchTerm = '';
 
             _init();
 
             function _init() {
                 _getContacts(URL_ID);
 
-                // vm.getContacts = _getContacts;
                 vm.addContact = _addContact;
                 vm.updateContact = _updateContact;
                 vm.deleteContact = _deleteContact;
@@ -60,7 +60,7 @@
             }
 
             function _deleteContact() {
-                ContactsService.deleteContact(id)
+                ContactsService.deleteContact(vm.form_data.id)
                     .then(function(response) {
                         console.log(response);
                     }, function(err) {

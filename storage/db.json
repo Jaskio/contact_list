@@ -38,7 +38,7 @@
     },
     {
       "id": 3,
-      "first_name": "Peterzrtzt",
+      "first_name": "Peter",
       "last_name": "Blackie",
       "address": "Some Street in USA 5478",
       "postal_code": "2564789",
@@ -53,26 +53,6 @@
         }
       ],
       "email": "peter.bl@gmail.com"
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "first_name": "gdhfg",
-      "last_name": "hfghfg",
-      "address": "hfgh",
-      "postal_code": "fghfg",
-      "id": 6
-    },
-    {
-      "first_name": "ghdfh",
-      "last_name": "jghj",
-      "address": "ghjgh",
-      "postal_code": "jghjghjghjghj",
-      "id": 7
     }
   ]
 }

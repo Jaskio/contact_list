@@ -1,6 +1,12 @@
+<input placeholder="Search..." ng-model="CC.searchTerm" /> <br>
 <a href="#/contact/add">Add new contact</a>
-<div ng-repeat = "contact in CC.contacts">
-    {{ contact.first_name }}
+<div ng-repeat = "contact in CC.contacts
+    | orderBy: CC.first_name
+    | search: CC.searchTerm">
+    <span>{{ contact.first_name }}</span>
+    <span>{{ contact.last_name }}</span>
+    <span>{{ contact.email }}</span>
+    <span ng-repeat = "phone in contact.phone">{{ phone.number }}</span>
     <a href="#/contact/{{contact.id}}/edit">Edit</a>
     <a href="#/contact/{{contact.id}}/delete">Delete</a>
 </div>
