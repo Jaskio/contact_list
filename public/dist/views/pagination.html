@@ -1,0 +1,39 @@
+<div>
+    <div>
+        Pages:
+        <span
+            ng-if = "PGC.currentPage > 0"
+            ng-click = "PGC.setPage(0)">
+            <a href="">First</a>
+        </span>
+        <span
+            ng-if = "PGC.currentPage > 0"
+            ng-click = "PGC.currentPage > 0 && PGC.setPage(PGC.currentPage - 1)">
+            <a href="">Previous</a>
+        </span>
+        <span
+            ng-class="{'active-page': page == PGC.currentPage + 1}"
+            ng-repeat = "page in PGC.generatePages(PGC.maxPages)
+                | startFrom: (PGC.currentPage > 1 ? PGC.currentPage - 2 : 0) 
+                | limitTo: PGC.pageSize"
+            ng-click = "PGC.setPage(page - 1)">
+            <a href="">
+                {{page}}
+            </a>
+        </span>
+        <span
+            ng-if = "PGC.maxPages > PGC.pageSize">
+            <a href="">...</a>
+        </span>
+        <span
+            ng-if = "PGC.currentPage < PGC.maxPages - 1"
+            ng-click = "PGC.currentPage < PGC.maxPages - 1 && PGC.setPage(PGC.currentPage + 1)">
+            <a href="">Next</a>
+        </span>
+        <span
+            ng-if = "PGC.currentPage < PGC.maxPages - 1"
+            ng-click = "PGC.currentPage < PGC.maxPages && PGC.setPage(PGC.maxPages - 1)">
+            <a href="">Last</a>
+        </span> &nbsp;&nbsp; {{PGC.currentPage + 1}} od {{PGC.maxPages}}
+    </div>
+</div>

@@ -17,6 +17,8 @@
             vm.contacts = [];
             vm.form_data = {};
             vm.searchTerm = '';
+            vm.currentPage = 0;
+            vm.pageSize = 3;
 
             _init();
 

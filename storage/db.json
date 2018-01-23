@@ -53,6 +53,93 @@
         }
       ],
       "email": "peter.bl@gmail.com"
+    },
+    {
+      "id": 4,
+      "first_name": "Maria",
+      "last_name": "Sanchez",
+      "address": "Some Street in Mexico 63548",
+      "postal_code": "4565476867",
+      "city": "Mexico City",
+      "country": "Mexico",
+      "phone": [
+        {
+          "number": "7777777777777"
+        }
+      ],
+      "email": "maria.sanchez@gmail.com"
+    },
+    {
+      "id": 5,
+      "first_name": "Peter",
+      "last_name": "Blackie",
+      "address": "Some Street in USA 5478",
+      "postal_code": "2564789",
+      "city": "Miami",
+      "country": "USA",
+      "phone": [
+        {
+          "number": "555555555555"
+        },
+        {
+          "number": "6666666666666"
+        }
+      ],
+      "email": "peter.bl@gmail.com"
+    },
+    {
+      "id": 6,
+      "first_name": "Peter",
+      "last_name": "Blackie",
+      "address": "Some Street in USA 5478",
+      "postal_code": "2564789",
+      "city": "Miami",
+      "country": "USA",
+      "phone": [
+        {
+          "number": "555555555555"
+        },
+        {
+          "number": "6666666666666"
+        }
+      ],
+      "email": "peter.bl@gmail.com"
+    },
+    {
+      "id": 7,
+      "first_name": "Peter",
+      "last_name": "Blackie",
+      "address": "Some Street in USA 5478",
+      "postal_code": "2564789",
+      "city": "Miami",
+      "country": "USA",
+      "phone": [
+        {
+          "number": "555555555555"
+        },
+        {
+          "number": "6666666666666"
+        }
+      ],
+      "email": "peter.bl@gmail.com"
+    },
+    {
+      "id": 8,
+      "first_name": "Peter",
+      "last_name": "Blackie",
+      "address": "Some Street in USA 5478",
+      "postal_code": "2564789",
+      "city": "Miami",
+      "country": "USA",
+      "phone": [
+        {
+          "number": "555555555555"
+        },
+        {
+          "number": "6666666666666"
+        }
+      ],
+      "email": "peter.bl@gmail.com"
     }
   ]
 }

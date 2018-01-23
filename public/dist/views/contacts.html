@@ -2,7 +2,9 @@
 <a href="#/contact/add">Add new contact</a>
 <div ng-repeat = "contact in CC.contacts
     | orderBy: CC.first_name
-    | search: CC.searchTerm">
+    | search: CC.searchTerm
+    | startFrom: CC.currentPage * CC.pageSize
+    | limitTo: CC.pageSize">
     <span>{{ contact.first_name }}</span>
     <span>{{ contact.last_name }}</span>
     <span>{{ contact.email }}</span>
@@ -10,3 +12,4 @@
     <a href="#/contact/{{contact.id}}/edit">Edit</a>
     <a href="#/contact/{{contact.id}}/delete">Delete</a>
 </div>
+<pagination page-size="CC.pageSize" current-page="CC.currentPage" items="CC.contacts"></pagination>
