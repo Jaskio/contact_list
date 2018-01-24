@@ -39,8 +39,7 @@
                 .when('/contact/:id/delete', {
                     templateUrl: 'dist/views/delete_contact.html',
                     controller: 'ContactsController',
-                    controllerAs: 'CC',
-                    test: 'test'
+                    controllerAs: 'CC'
                 })
         };
 
