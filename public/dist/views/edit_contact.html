@@ -1,7 +1,63 @@
-<input type="text" ng-model = "CC.form_data.first_name">
-<input type="text" ng-model = "CC.form_data.last_name">
-<input type="text" ng-model = "CC.form_data.address">
-<input type="text" ng-model = "CC.form_data.postal_code">
-<button type="button" ng-click = "CC.updateContact()">Add</button>
+
+<div class="container">
+    <div class="row">
+        <div class="form-group">
+            <h3>Edit information about {{CC.form_data.first_name}} {{CC.form_data.last_name}}</h3>
+        </div>
+    </div>
+    <div class="row">
+        
+        <div class="col-md-4">
+            
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="First name *"
+                    ng-model = "CC.form_data.first_name">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Last name *"
+                    ng-model = "CC.form_data.last_name">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Address *"
+                    ng-model = "CC.form_data.address">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Postal code *"
+                    ng-model = "CC.form_data.postal_code">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="City *"
+                    ng-model = "CC.form_data.city">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Country *"
+                    ng-model = "CC.form_data.country">
+            </div>
+            
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Email *"
+                    ng-model = "CC.form_data.email">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Phone *"
+                    ng-model = "CC.phone_number">
+                <button type="button" class="btn btn-success"
+                    ng-click = "CC.addPhone()"
+                    ng-disabled = "CC.phone_number === ''">Add</button>
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="{{phone.number}}" readonly=""
+                    ng-repeat = "phone in CC.form_data.phone">
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <button type="button" class="btn btn-success" ng-click = "CC.updateContact()">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 

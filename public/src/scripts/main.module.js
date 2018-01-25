@@ -3,7 +3,8 @@
 
     angular
         .module('phonebook', [
-            'ngRoute'
+            'ngRoute',
+            'angular.filter'
         ]);
 
     angular
@@ -16,7 +17,7 @@
             '$locationProvider'
         ];
 
-        function config($routeProvider, $locationProvider){
+        function config($routeProvider, $locationProvider) {
 
             $locationProvider.hashPrefix('');
 
@@ -33,11 +34,6 @@
                 })
                 .when('/contact/:id/edit', {
                     templateUrl: 'dist/views/edit_contact.html',
-                    controller: 'ContactsController',
-                    controllerAs: 'CC'
-                })
-                .when('/contact/:id/delete', {
-                    templateUrl: 'dist/views/delete_contact.html',
                     controller: 'ContactsController',
                     controllerAs: 'CC'
                 })

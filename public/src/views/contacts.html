@@ -1,65 +1,249 @@
-<input placeholder="Search..." ng-model="CC.searchTerm" /> <br>
-<a href="#/contact/add">Add contact</a>
-<button type="button" ng-click = "CC.mergeList()">Merge contacts</button>
-<div ng-repeat = "contact in CC.contacts
-    | orderBy: CC.first_name
-    | search: CC.searchTerm
-    | startFrom: CC.currentPage * CC.pageSize
-    | limitTo: CC.pageSize">
-    <span>{{ contact.first_name }}</span>
-    <span>{{ contact.last_name }}</span>
-    <span>{{ contact.email }}</span>
-    <span ng-repeat = "phone in contact.phone">{{ phone.number }}</span>
-    <a href="#/contact/{{contact.id}}/edit">Edit</a>
-    <a href="#/contact/{{contact.id}}/delete">Delete</a>
-</div>
-<pagination page-size="CC.pageSize" current-page="CC.currentPage" items="CC.contacts"></pagination>
 
-<div 
-    ng-if = "CC.mergeListVisible"
-    ng-repeat = "(key, contact) in CC.merge_list">
-    <div ng-click = "CC.showForm(contact)">
-        {{ contact[0].first_name }} {{ contact[0].last_name }}
+
+
+
+<div class="container-fluid">
+    <div class="row form-group">
+        <div class="col-md-3">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" ng-model="CC.searchTerm">
+        </div>
+        <!-- col-md-offset doesn't work in this theme -->
+        <div class="col-md-6"></div>
+        <div class="col-md-3">
+            <a href="#/contact/add">
+                <button type="button" class="btn btn-success">+Add New</button>
+            </a>
+            <button type="button" class="btn btn-secondary" ng-click = "CC.mergeList()">Merge contacts</button>
+        </div>
     </div>
+    <div class="row-fluid">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Index</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Postal Code</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat = "contact in CC.contacts
+                    | orderBy: CC.first_name
+                    | search: CC.searchTerm
+                    | startFrom: CC.currentPage * CC.pageSize
+                    | limitTo: CC.pageSize">
+                    <th scope="row">{{ $index + 1 + (CC.currentPage * CC.pageSize) }}</th>
+                    <td>{{ contact.first_name }}</td>
+                    <td>{{ contact.last_name }}</td>
+                    <td>{{ contact.address }}</td>
+                    <td>{{ contact.postal_code }}</td>
+                    <td>{{ contact.city }}</td>
+                    <td>{{ contact.country }}</td>
+                    <td>
+                        <div ng-repeat = "phone in contact.phone">
+                            {{ phone.number }}
+                        </div>
+                    </td>
+                    <td>{{ contact.email }}</td>
+                    <td>
+                        <a href="#/contact/{{contact.id}}/edit">
+                            <button type="button" class="btn btn-info">Edit</button>
+                        </a>
+                        <button type="button" class="btn btn-danger"
+                            ng-click = "CC.confirmDelete = true; CC.deleteID = contact.id">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination page-size="CC.pageSize" current-page="CC.currentPage" items="CC.contacts"></pagination>
+   </div>
 </div>
 
-<!-- ovdje objekat samo, prenesen iz merging list -->
 
-<div ng-if = "CC.mergeFormVisible">
-    <br>
-    <div>Merge options for contact:</div>
-    <div>
-        <h3>{{ CC.merged_contact[0].first_name }} {{ CC.merged_contact[0].last_name }}</h3>
-        <div>
-            <div>
-                Address:
-            </div>
-            <select
+
+
+<div class="container-fluid"
+    ng-if = "CC.mergeListVisible">
+<div class="row">
+    
+
+
+
+
+<div class="list-group col-md-3">
+    <a href="" class="list-group-item list-group-item-action"
+        ng-repeat = "(key, contact) in CC.merge_list"
+        ng-class = "{'active': CC.merged_contact[0].id == contact[0].id}">
+        <div ng-click = "CC.showForm(contact)">
+            {{ contact[0].first_name }} {{ contact[0].last_name }}
+        </div>
+    </a>
+</div>
+
+<div class="col-md-1"></div>
+
+<div class="list-group col-md-4"
+    ng-if = "CC.mergeFormVisible">
+    <a href="" class="list-group-item list-group-item-action flex-column align-items-start active">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Merge options for {{ CC.merged_contact[0].first_name }} {{ CC.merged_contact[0].last_name }}</h5>
+        </div>
+        <!--<p class="mb-1"></p>-->
+        <!--<small>Donec id elit non mi porta.</small>-->
+    </a>
+    <a href="" class="list-group-item list-group-item-action flex-column align-items-start">
+        <!--<p class="mb-1">Address</p>-->
+        <div class="form-group">
+            <select class="form-control"
                 ng-model = "CC.form_data.address">
                 <option selected value = "">Select address</option>
-                <option ng-repeat = "address in CC.merged_contact" value = "{{address.address}}">
-                    {{address.address }}
+                <option ng-repeat = "contact in CC.merged_contact | unique: 'address'" value = "{{contact.address}}">
+                    {{contact.address}}
                 </option>
             </select>
-            {{ CC.form_data.address }}
         </div>
-        <div>
-            <div>
-                Postal code:
-            </div>
-            <select
+        <div class="form-group">
+            <select class="form-control"
                 ng-model = "CC.form_data.postal_code">
-                <option selected value = "">Select address</option>
-                <option ng-repeat = "code in CC.merged_contact" value = "{{code.postal_code}}">
-                    {{code.postal_code }}
+                <option selected value = "">Select postal code</option>
+                <option ng-repeat = "contact in CC.merged_contact | unique: 'postal_code'" value = "{{contact.postal_code}}">
+                    {{contact.postal_code}}
                 </option>
             </select>
-            {{ CC.form_data.postal_code }}
+        </div>
+        <div class="form-group">
+            <select class="form-control"
+                ng-model = "CC.form_data.city">
+                <option selected value = "">Select city</option>
+                <option ng-repeat = "contact in CC.merged_contact | unique: 'city'" value = "{{contact.city}}">
+                    {{contact.city}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control"
+                ng-model = "CC.form_data.country">
+                <option selected value = "">Select country</option>
+                <option ng-repeat = "contact in CC.merged_contact | unique: 'country'" value = "{{contact.country}}">
+                    {{contact.country}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group" title="Hold Ctrl + left mouse click to select multiple phone numbers">
+            <select multiple="" class="form-control"
+                ng-model = "CC.form_data.phone">
+                <option disabled value = "">Select phone</option>
+                <option ng-repeat = "phone in CC.phone_numbers | unique: 'number'" value = "{{phone}}">
+                    {{phone.number}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control"
+                ng-model = "CC.form_data.email">
+                <option selected value = "">Select email</option>
+                <option ng-repeat = "contact in CC.merged_contact | unique: 'email'" value = "{{contact.email}}">
+                    {{contact.email}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-success col-md-4"
+                ng-click = "CC.mergeProcess()">
+                Merge
+            </button>
+            <button type="button" class="btn btn-secondary col-md-4"
+                ng-click = "CC.mergeListVisible = false">
+                Cancel
+            </button>
+        </div>
+    </a>
+</div>
+
+
+
+    
+    <!--<div>
+        <div 
+            ng-repeat = "(key, contact) in CC.merge_list">
+            <div ng-click = "CC.showForm(contact)">
+                {{ contact[0].first_name }} {{ contact[0].last_name }}
+            </div>
+        </div>
+    </div>-->
+
+
+
+    <div ng-if = "CC.mergeFormVisible">
+        <br>
+        <!--<div>
+            <h3>{{ CC.merged_contact[0].first_name }} {{ CC.merged_contact[0].last_name }}</h3>
+            <div>
+                <div>
+                    Address:
+                </div>
+                <select
+                    ng-model = "CC.form_data.address">
+                    <option selected value = "">Select address</option>
+                    <option ng-repeat = "address in CC.merged_contact" value = "{{address.address}}">
+                        {{address.address }}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <div>
+                    Postal code:
+                </div>
+                <select
+                    ng-model = "CC.form_data.postal_code">
+                    <option selected value = "">Select address</option>
+                    <option ng-repeat = "code in CC.merged_contact" value = "{{code.postal_code}}">
+                        {{code.postal_code }}
+                    </option>
+                </select>
+            </div>
+        </div>-->
+        <!--<button type="button" 
+            ng-click = "CC.mergeProcess()">
+            Merge
+        </button>
+        <button type="button" 
+            ng-click = "CC.mergeListVisible = false">
+            Cancel
+        </button>-->
+    </div>
+</div>
+</div>
+
+
+
+
+
+<!-- Pop-up window, contact delete confirmation -->
+<div class="modal"
+    ng-style = "{display: CC.confirmDelete ? 'block' : 'none'}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm</h5>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"
+                    ng-click = "CC.deleteContact(CC.deleteID)">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    ng-click = "CC.confirmDelete = false">Cancel</button>
+            </div>
         </div>
     </div>
-    <button type="button" 
-        ng-click = "CC.mergeProcess()">
-        Submit
-    </button>
-    {{ CC.form_data }}
 </div>

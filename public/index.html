@@ -4,16 +4,16 @@
         <title>Phonebook</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!--<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">-->
+        <link href="node_modules/bootswatch/dist/journal/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <header-directive></header-directive>
         <site-navigation back="back" forward="forward"></site-navigation>
         <main ng-view autoscroll="true"></main>
-        <footer-directive></footer-directive>
         
         <script src="node_modules/angular/angular.min.js"></script>
         <script src="node_modules/angular-route/angular-route.min.js"></script>
+        <script src="node_modules/angular-filter/dist/angular-filter.min.js"></script>
         <script src="node_modules/jquery/dist/jquery.min.js"></script>
         <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="node_modules/lodash/lodash.min.js"></script>

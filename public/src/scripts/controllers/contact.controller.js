@@ -7,27 +7,31 @@
 
         ContactsController.$inject = [
             'ContactsService',
-            '$route'
+            '$route',
+            '$location'
         ];
 
-        function ContactsController(ContactsService, $route) {
+        function ContactsController(ContactsService, $route, $location) {
             var vm = this;
             var URL_ID = $route.current.params.id;
     
             vm.contacts = [];
-            vm.form_data = {};
+            // vm.form_data = {};
             vm.merge_list = {};
+            vm.phone_number = '';
             vm.searchTerm = '';
             vm.currentPage = 0;
             vm.pageSize = 3;
             vm.mergeFormVisible = false;
             vm.mergeListVisible = false;
             vm.preparedToDelete = [];
+            vm.confirmDelete = false;
 
             _init();
 
             function _init() {
                 _getContacts(URL_ID);
+                vm.form_data = _newContact();
                 
                 vm.addContact = _addContact;
                 vm.updateContact = _updateContact;
@@ -35,21 +39,29 @@
                 vm.showForm = _showForm;
                 vm.mergeList = _mergeList;
                 vm.mergeProcess = _mergeProcess;
+                vm.addPhone = _addPhone;
             }
 
             function _showForm(contact) {
                 vm.mergeFormVisible = true;
                 vm.merged_contact = contact;
-                vm.form_data = _newContact();
+                vm.phone_numbers = [];
+                // vm.form_data = _newContact();
 
                 vm.merged_contact.forEach(function(single_contact) {
                     vm.preparedToDelete.push(single_contact.id);
+                    single_contact.phone.forEach(function(phone) {
+                        vm.phone_numbers.push(phone);
+                    });
                 });
+
+                // vm.phone_numbers = _.uniqBy(vm.phone_numbers, 'number');
             }
 
 
             function _mergeList() {
                 vm.mergeListVisible = true;
+                
 
                 var sorted = _.orderBy(vm.contacts, ['first_name', 'last_name']),
                     results = [];
@@ -65,8 +77,6 @@
                 var uniq = _.uniq(results);
 
                 vm.merge_list = _.groupBy(uniq, 'first_name');
-                
-                
             }
 
 
@@ -104,6 +114,14 @@
                     phone: [],
                     email: ''
                 }
+            }
+
+            function _addPhone() {
+                vm.form_data.phone.push(
+                    {number: vm.phone_number}
+                );
+
+                vm.phone_number = '';
             }
 
             function _getContacts(id) {
@@ -145,6 +163,7 @@
                     .then(function(response) {
                         console.log(response);
                         _getContacts(null);
+                        vm.confirmDelete = false;
                     }, function(err) {
                         console.log(err);
                     });

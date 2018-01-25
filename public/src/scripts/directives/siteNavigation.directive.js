@@ -23,12 +23,12 @@
         }
 
         function linkFn(scope, element, attrs) {
-            angular.element(element[0].childNodes[0]).on('click', function() {
+            angular.element(element[0].childNodes[0].childNodes[1]).on('click', function() {
                 history.back();
                 scope.$apply();
             });
 
-            angular.element(element[0].childNodes[1]).on('click', function() {
+            angular.element(element[0].childNodes[0].childNodes[3]).on('click', function() {
                 history.forward();
                 scope.$apply();
             });
