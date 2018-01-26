@@ -20,7 +20,11 @@
                 service.deleteContact = _deleteContact;
             }
 
-            
+            /**
+             * Send request with specific id or empty string for all contacts
+             * 
+             * @param {Integer} id 
+             */
             function _getContacts(id) {
                 var defer = $q.defer();
                 var provided_id = id || '';
@@ -35,6 +39,11 @@
                 return defer.promise;
             }
 
+            /**
+             * Send data with newly created contact
+             * 
+             * @param {Object} data 
+             */
             function _addContact(data) {
                 var defer = $q.defer();
 
@@ -48,6 +57,11 @@
                 return defer.promise;
             }
 
+            /**
+             * Send data to update current contact
+             * 
+             * @param {Object} data 
+             */
             function _updateContact(data) {
                 var defer = $q.defer();
 
@@ -61,6 +75,11 @@
                 return defer.promise;
             }
 
+            /**
+             * Send specific id to perform delete operation
+             * 
+             * @param {Integer} id 
+             */
             function _deleteContact(id) {
                 var defer = $q.defer();
 

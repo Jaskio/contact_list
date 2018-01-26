@@ -1,13 +1,11 @@
 <div class="container">
-    <div class="row">
-        <div class="form-group">
+    <div class="row text-center">
+        <div class="form-group col-md-12">
             <h3>ADD NEW CONTACT</h3>
         </div>
     </div>
     <div class="row">
-        
         <div class="col-md-4">
-            
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="First name *"
                     ng-model = "CC.form_data.first_name">
@@ -32,30 +30,46 @@
                 <input type="text" class="form-control" placeholder="Country *"
                     ng-model = "CC.form_data.country">
             </div>
-            
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Email *"
                     ng-model = "CC.form_data.email">
             </div>
-            <div class="form-group">
+            <div class="input-group form-group">
                 <input type="text" class="form-control" placeholder="Phone *"
                     ng-model = "CC.phone_number">
-                <button type="button" class="btn btn-success"
+                <div class="p-1"></div>
+                <button type="button" class="btn btn-info input-group-btn"
                     ng-click = "CC.addPhone()"
                     ng-disabled = "CC.phone_number === ''">Add</button>
             </div>
-            <div class="form-group">
-                <input class="form-control" type="text" placeholder="{{phone.number}}" readonly=""
+            <div class="input-group">
+                <div class="form-group col-md-6"
                     ng-repeat = "phone in CC.form_data.phone">
+                    <input class="form-control" type="text" placeholder="{{phone.number}}" readonly="">
+                </div>
             </div>
         </div>
         <div class="col-md-8">
             <div class="form-group">
-                <button type="button" class="btn btn-success" ng-click = "CC.addContact()">Add</button>
+                <button type="button" class="btn btn-success col-md-2" 
+                    ng-click = "CC.addContact()"
+                    ng-disabled = "CC.formValidation()">Save</button>
+                <button type="button" class="btn btn-secondary col-md-2" 
+                    ng-click = "CC.setURL('/')">Cancel</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Success message for newly created contact -->
+<div class="card border-success mb-3" style="max-width: 20rem;position:absolute;left:40%;top:40%;"
+    ng-if = "CC.successMessage">
+    <div class="card-header">Confirmation message</div>
+    <div class="card-body text-success">
+        <h4 class="card-title">
+            {{CC.form_data.first_name}} {{CC.form_data.last_name}} is successfully saved.
+        </h4>
+    </div>
+</div>

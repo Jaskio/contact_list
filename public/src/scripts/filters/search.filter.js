@@ -23,7 +23,7 @@
                         });
                     }
                 });
-
+                
                 return filtered_contacts;
             }
         }
